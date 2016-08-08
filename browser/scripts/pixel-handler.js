@@ -30,7 +30,8 @@ define([], function(){
 
   function clearPixel(data, pos){
       var position = getPixelPosition(pos.x, pos.y, pos.width);
-
+      setColor(data, position, {r: 0, g: 0, b: 0}, 0);
+      return data;
   }
 
   function getPixelPosition(x, y, width){

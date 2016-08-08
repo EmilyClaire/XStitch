@@ -33,9 +33,22 @@ define(['pixel-handler'], function(pixel){
     return arr;
   }
 
+  function erase(pos){
+    return pixel.clearPixel(data, pos);
+  }
+
+  function reset(width, height){
+    for(var i = 0; i < width * height * 4; i++){
+      data[i] = 0;
+    }
+    return data;
+  }
+
   return {
     draw: draw,
     setData: setData,
-    getImageArray: getImageArray
+    getImageArray: getImageArray,
+    erase: erase,
+    reset: reset
   };
 })
