@@ -4,6 +4,8 @@
   "description": "An app for designing cross stitch patterns",
   "main": "module.js",
   "scripts": {
+    "build-js": "browserify browser/scripts/main.js > browser/scripts/bundle.js",
+    "watch-js": "watchify browser/scripts/main.js -o browser/scripts/bundle.js --debug --verbose",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,10 +27,12 @@
   "homepage": "https://github.com/EmilyClaire/XStitch#readme",
   "dependencies": {
     "angular": "^1.5.8",
+    "browserify": "^13.1.0",
     "express": "^4.14.0",
     "http": "0.0.0",
     "path": "^0.12.7",
-    "ui-router": "^1.0.0-alpha.3"
+    "ui-router": "^1.0.0-alpha.3",
+    "watchify": "^3.7.0"
   },
   "devDependencies": {
     "babelify": "^7.3.0"

@@ -19,6 +19,10 @@ canvas.addEventListener('mousemove', function(evt){
     var pos = {
       x:  Math.floor((evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width),
       y:  Math.floor((evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height)
+    }
+  }
+})
+
 canvas.addEventListener('mouseup',   function(){
   mouseDown = false;
   context.putImageData(paint.getImage(), 0, 0);
@@ -28,5 +32,4 @@ var btm = document.createElement('canvas');
 btm.width = 400;
 btm.height = 600;
 document.body.appendChild(btm);
-var btmContext = btm.getContext('2d');
-
+var btmContext = btm.getContext('2d')

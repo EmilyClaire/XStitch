@@ -1,54 +1,53 @@
 'use strict';
+var pixel = require('./pixel-handler')
+var data = [];
 
-define(['pixel-handler'], function(pixel){
-  var data = [];
 
+function draw (stitch, pos){
+  return pixel.setPixel(data, pos, stitch.color, stitch.a);
+}
 
-  function draw (stitch, pos){
-    return pixel.setPixel(data, pos, stitch.color, stitch.a);
+function setData(arr){
+
+  for (var i = 0; i < arr.length; i++) {
+    data[i] = arr[i];
   }
+}
 
-  function setData(arr){
+function getImageArray(width, height){
+  var arr = Array(width).fill().map(()=>Array(height).fill())
 
-    for (var i = 0; i < arr.length; i++) {
-      data[i] = arr[i];
+
+  var pos = {};
+
+  for (var i = 0; i < width; i ++){
+    for (var j = 0; j < height; j ++){
+      pos.x = i;
+      pos.y = j;
+      pos.width = width;
+
+      arr[i][j] = pixel.getPixel(data, pos);
     }
   }
+  return arr;
+}
 
-  function getImageArray(width, height){
-    var arr = Array(width).fill().map(()=>Array(height).fill())
+function erase(pos){
+  return pixel.clearPixel(data, pos);
+}
 
-
-    var pos = {};
-
-    for (var i = 0; i < width; i ++){
-      for (var j = 0; j < height; j ++){
-        pos.x = i;
-        pos.y = j;
-        pos.width = width;
-
-        arr[i][j] = pixel.getPixel(data, pos);
-      }
-    }
-    return arr;
+function reset(width, height){
+  for(var i = 0; i < width * height * 4; i++){
+    data[i] = 0;
   }
+  return data;
+}
 
-  function erase(pos){
-    return pixel.clearPixel(data, pos);
-  }
+return module.exports = {
+  draw: draw,
+  setData: setData,
+  getImageArray: getImageArray,
+  erase: erase,
+  reset: reset
+};
 
-  function reset(width, height){
-    for(var i = 0; i < width * height * 4; i++){
-      data[i] = 0;
-    }
-    return data;
-  }
-
-  return {
-    draw: draw,
-    setData: setData,
-    getImageArray: getImageArray,
-    erase: erase,
-    reset: reset
-  };
-})
